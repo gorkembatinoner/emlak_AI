@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{{ super() }}
+{% include "styles.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sol Taraf - Form -->
+        <div class="col-md-4">
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h4 class="card-title">Fiyat Tahmin</h4>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ url_for('index') }}">
+                         <div class="mb-3">
+            <label>Konum (İlçe - Mahalle)</label>
+            <select name="konum" class="form-control" required>
+                <option value="">Seçiniz</option>
+                {% for ilce, mahalleler in ilce_mahalle_gruplari.items() %}
+                <optgroup label="{{ ilce }}">
+                    {% for mahalle in mahalleler %}
+                    <option value="{{ mahalle }}" {% if selected_options and selected_options['İlçe'] == mahalle %}selected{% endif %}>{{ mahalle }}</option>
+                    {% endfor %}
+                </optgroup>
+                {% endfor %}
+            </select>
+        </div>
+                        <div class="mb-3">
+                            <label>Oda Sayısı</label>
+                            <input type="number" name="oda_sayisi" class="form-control" min="1" max="10" required value="{% if selected_options %}{{ selected_options['Oda Sayısı'] }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Salon Sayısı</label>
+                            <input type="number" name="salon_sayisi" class="form-control" min="0" max="5" required value="{% if selected_options %}{{ selected_options['Salon Sayısı'] }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Metrekare</label>
+                            <input type="number" name="metrekare" class="form-control" min="1" max="1000" required value="{% if selected_options %}{{ selected_options['Metrekare'] }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Bulunduğu Kat</label>
+                            <input type="number" name="bulundugu_kat" class="form-control" min="-5" max="50" required value="{% if selected_options %}{{ selected_options['Bulunduğu Kat'] }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Bina Yaşı</label>
+                            <input type="number" name="bina_yasi" class="form-control" min="0" max="100" required value="{% if selected_options %}{{ selected_options['Bina Yaşı'] }}{% endif %}">
+                        </div>
+                        <div class="mb-3">
+                            <label>Isıtma Tipi</label>
+                            <select name="isitma" class="form-control">
+                                {% for key, value in column_options['Isıtma'].items() %}
+                                <option value="{{ key }}" {% if selected_options and selected_options['Isıtma'] == value %}selected{% endif %}>{{ value }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-primary">Tahmin Et</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ Taraf - Tahmin Sonucu -->
+        <div class="col-md-8">
+            {% if predicted_price is not none and request.method == 'POST' %}
+            <div class="card mt-5" id="prediction-result-card">
+                <div class="card-header">
+                    <h4 class="card-title">Tahmin Sonucu</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-success">
+                        <h4 class="alert-heading">Tahmini Fiyat</h4>
+                        <p class="mb-0 display-4 text-center">{{ predicted_price }} TL</p>
+                    </div>
+                    {% if selected_options %}
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Seçilen Özellikler</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                {% if selected_options['İlçe'] %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Konum:</strong>
+                                    <span>{{ selected_options['İlçe'] }}</span>
+                                </li>
+                                {% endif %}
+                                {% if selected_options['Oda Sayısı'] %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Oda Sayısı:</strong>
+                                    <span>{{ selected_options['Oda Sayısı'] }}</span>
+                                </li>
+                                {% endif %}
+                                {% if selected_options['Salon Sayısı'] %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Salon Sayısı:</strong>
+                                    <span>{{ selected_options['Salon Sayısı'] }}</span>
+                                </li>
+                                {% endif %}
+                                {% if selected_options['Metrekare'] %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Metrekare:</strong>
+                                    <span>{{ selected_options['Metrekare'] }}</span>
+                                </li>
+                                {% endif %}
+                                {% if selected_options['Bulunduğu Kat'] %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Bulunduğu Kat:</strong>
+                                    <span>{{ selected_options['Bulunduğu Kat'] }}</span>
+                                </li>
+                                {% endif %}
+                                {% if selected_options['Bina Yaşı'] %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Bina Yaşı:</strong>
+                                    <span>{{ selected_options['Bina Yaşı'] }}</span>
+                                </li>
+                                {% endif %}
+                                {% if selected_options['Isıtma'] %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <strong>Isıtma Tipi:</strong>
+                                    <span>{{ selected_options['Isıtma'] }}</span>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if error %}
+            <div class="alert alert-danger mt-5">
+                {{ error }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Alt Kısım - Harita -->
+    {% if predicted_price %}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Konum Bilgisi</h5>
+                </div>
+                <div class="card-body">
+                    <div id="map" style="height: 400px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    // AOS Animasyon başlatma
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true
+    });
+</script>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+{% endblock %}

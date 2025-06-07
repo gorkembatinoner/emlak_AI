@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% block title %}
+Deprem Riski Hesaplama
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Tekirdağ Bölgesi Deprem Riski Analizi</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="mb-4">Tarihsel Depremler</h5>
+            <div class="alert alert-info">
+                <h6>1912 Mürefte Depremi</h6>
+                <p>Büyüklük: 7.4 Mw<br>
+                Tarih: 9 Ağustos 1912<br>
+                Etki: Tekirdağ'ın Mürefte ilçesinde meydana gelen bu deprem, bölgede büyük yıkıma neden olmuştur. Yaklaşık 3000 kişi hayatını kaybetmiş ve büyük maddi hasar oluşmuştur.</p>
+            </div>
+
+            <div class="alert alert-warning">
+                <h6>1976 Çorlu Depremi</h6>
+                <p>Büyüklük: 4.8 Mw<br>
+                Tarih: 13 Mart 1976<br>
+                Etki: Çorlu'da meydana gelen bu deprem, önemli hasarlara neden olmuştur.</p>
+            </div>
+
+            <h5 class="mt-4 mb-3">Bölgesel Konum ve Fay Hatları</h5>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p>Tekirdağ, Türkiye'nin en aktif fay hatlarından biri olan Kuzey Anadolu Fay Hattı (KAF)'na yakın bir konumda yer almaktadır. Bu fay hattı, Marmara Denizi'nin altından geçerek Tekirdağ'ın güney kıyılarına yakın bir rota izler. Bu nedenle Tekirdağ, sismik açıdan yüksek risk taşıyan bölgeler arasında yer alır.</p>
+                </div>
+            </div>
+
+            <h5 class="mt-4 mb-3">İlçelere Göre Deprem Riski</h5>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h6>Risk Derecelendirmesi</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-danger">Birinci Derece Riskli İlçeler</h6>
+                            <ul>
+                                <li>Şarköy</li>
+                                <li>Marmaraereğlisi</li>
+                                <li>Altınova</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-warning">İkinci Derece Riskli İlçeler</h6>
+                            <ul>
+                                <li>Çorlu</li>
+                                <li>Malkara</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <h6 class="text-info">Üçüncü Derece Riskli İlçeler</h6>
+                            <ul>
+                                <li>Çerkezköy</li>
+                                <li>Muratlı</li>
+                                <li>Hayrabolu</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-success">Dördüncü Derece Riskli İlçeler</h6>
+                            <ul>
+                                <li>Saray</li>
+                                <li>Beyazköy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="mt-4 mb-3">Güncel Sismik Aktivite</h5>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p>Tekirdağ ve çevresinde, özellikle Marmara Denizi açıklarında, sık sık küçük ve orta ölçekli depremler meydana gelmektedir. Örneğin, 24 Nisan 2025 tarihinde Marmaraereğlisi açıklarında 3.9 büyüklüğünde bir deprem kaydedilmiştir.</p>
+                </div>
+            </div>
+
+            <h5 class="mt-4 mb-3">Gelecek Risk Değerlendirmesi</h5>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h6>Tekirdağ'ın Depremselliği</h6>
+                    <ul>
+                        <li>Tekirdağ, Kuzey Anadolu Fay Hattı'nın batı uzantısı üzerinde yer almaktadır.</li>
+                        <li>Bölge, 1. derece deprem bölgesi olarak sınıflandırılmaktadır.</li>
+                        <li>Son 100 yılda bölgede 5.0 ve üzeri büyüklükte 10'dan fazla deprem meydana gelmiştir.</li>
+                        <li>Marmara Denizi içindeki fay hatları, Tekirdağ için önemli bir risk oluşturmaktadır.</li>
+                    </ul>
+                    <div class="alert alert-danger mt-3">
+                        <h6>Gelecek Risk Uyarısı</h6>
+                        <p>Uzmanlar, Marmara Bölgesi'nde büyük bir depremin meydana gelme olasılığının yüksek olduğunu belirtmektedir. Tekirdağ'ın bu potansiyel depremden etkilenme riski, konumu nedeniyle oldukça yüksektir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h5 class="mt-4 mb-3">Risk Azaltma Önerileri</h5>
+            <div class="card">
+                <div class="card-body">
+                    <h6>Yapısal Önlemler</h6>
+                    <ul>
+                        <li>Binaların deprem yönetmeliğine uygun inşa edilmesi</li>
+                        <li>Mevcut yapıların depreme dayanıklılık testlerinin yapılması</li>
+                        <li>Riskli yapıların güçlendirilmesi veya yenilenmesi</li>
+                    </ul>
+                    <h6 class="mt-3">Hazırlık ve Eğitim</h6>
+                    <ul>
+                        <li>Deprem çantası hazırlanması</li>
+                        <li>Acil durum planlarının oluşturulması</li>
+                        <li>Düzenli deprem tatbikatlarının yapılması</li>
+                        <li>Halkın deprem bilinci konusunda eğitilmesi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
