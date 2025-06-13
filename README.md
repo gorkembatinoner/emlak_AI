@@ -13,7 +13,7 @@ Bu proje, Tekirdağ bölgesindeki konutlar için hem **emlak fiyat tahmini** hem
 
 ## 📁 Proje Yapısı
 
-emlak_IA/
+emlak_AI/
 ├── app.py # Ana Flask uygulaması
 ├── random_forest_model.pkl # Eğitilmiş model
 ├── konum_encoded_LOO.xlsx # Bölge verileri (encoding)
